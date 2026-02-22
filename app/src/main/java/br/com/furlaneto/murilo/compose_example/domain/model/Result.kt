@@ -1,4 +1,4 @@
-package br.com.furlaneto.murilo.compose_example.model
+package br.com.furlaneto.murilo.compose_example.domain.model
 
 sealed class Result<out T> {
     data class Success<T>(val data: T) : Result<T>()

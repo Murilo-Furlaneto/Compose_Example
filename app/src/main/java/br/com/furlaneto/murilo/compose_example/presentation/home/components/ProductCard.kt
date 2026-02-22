@@ -1,4 +1,4 @@
-package br.com.furlaneto.murilo.compose_example.ui.components
+package br.com.furlaneto.murilo.compose_example.presentation.home.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.furlaneto.murilo.compose_example.model.Product
+import br.com.furlaneto.murilo.compose_example.domain.model.Product
 import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)

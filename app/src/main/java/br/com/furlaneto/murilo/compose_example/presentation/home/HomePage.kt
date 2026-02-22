@@ -1,4 +1,4 @@
-package br.com.furlaneto.murilo.compose_example.pages
+package br.com.furlaneto.murilo.compose_example.presentation.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,13 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import br.com.furlaneto.murilo.compose_example.mock.getProducts
-import br.com.furlaneto.murilo.compose_example.ui.components.ProductCard
+import br.com.furlaneto.murilo.compose_example.presentation.home.components.ProductCard
 
 @Composable
-fun HomePage(navController: NavController) {
-    val products = getProducts()
+fun HomePage(
+    navController: NavController,
+    viewModel: HomeViewModel = viewModel()
+) {
+    val products = viewModel.products
 
     Column(
         modifier = Modifier

@@ -1,4 +1,4 @@
-package br.com.furlaneto.murilo.compose_example.model
+package br.com.furlaneto.murilo.compose_example.domain.model
 
 data class Product(
     val id: Int,

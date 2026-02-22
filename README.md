@@ -1,56 +1,49 @@
 # 🍔 Compose Delivery - Projeto de Estudos
 
-Este é um projeto desenvolvido para fins de aprendizado, focado em explorar os recursos modernos do **Jetpack Compose** no ecossistema Android. O objetivo principal foi implementar um fluxo de um app de delivery, desde o login até a visualização detalhada de produtos.
+Este é um projeto desenvolvido para fins de aprendizado, focado em explorar os recursos modernos do **Jetpack Compose** no ecossistema Android, agora estruturado seguindo os princípios da **Clean Architecture**.
 
 ## 🚀 Tecnologias e Conceitos Praticados
 
 - **[Kotlin](https://kotlinlang.org/):** Linguagem base do projeto.
 - **[Jetpack Compose](https://developer.android.com/jetpack/compose):** Construção de interface declarativa.
-- **[Material Design 3](https://m3.material.io/):** Utilização de componentes modernos, cores e tipografia do Material You.
-- **[Navigation Compose](https://developer.android.com/jetpack/compose/navigation):** Gerenciamento de rotas e passagem de argumentos dinâmicos entre telas.
-- **[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel):** Gerenciamento de estado e lógica de negócio separada da UI.
-- **[Coil](https://coil-kt.github.io/coil/):** Carregamento de imagens assíncronas via URL.
-- **[Sealed Classes](https://kotlinlang.org/docs/sealed-classes.html):** Implementação de um padrão de `Result` para tratamento de validações de forma segura e idiomática.
+- **[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html):** Separação de responsabilidades em camadas (Domain, Data, Presentation).
+- **[Material Design 3](https://m3.material.io/):** Componentes modernos e design "Flat".
+- **[Navigation Compose](https://developer.android.com/jetpack/compose/navigation):** Gerenciamento de rotas e argumentos dinâmicos.
+- **[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel):** Persistência de estado de UI.
+- **[Coil](https://coil-kt.github.io/coil/):** Carregamento de imagens assíncronas.
 
 ## 📱 Funcionalidades
 
-- **Tela de Login:** 
-    - Validação de campos (Nome, Email e Senha).
-    - Tratamento de erros em tempo real com mensagens via Toast.
-- **Lista de Produtos (Home):**
-    - Exibição de produtos consumindo um Mock local.
-    - Layout "Flat" moderno com `LazyColumn` para alta performance.
-- **Detalhes do Produto:**
-    - Navegação dinâmica baseada no ID do produto.
-    - Exibição de imagem em destaque, descrição e preço.
+- **Autenticação:** Validação de login via UseCase especializado.
+- **Catálogo:** Listagem de produtos consumindo um repositório (Mock).
+- **Detalhes:** Visualização profunda de cada item com navegação dinâmica.
 
-## 🛠️ Estrutura do Projeto
+## 🛠️ Estrutura do Projeto (Clean Architecture)
 
 ```
 src/main/java/.../compose_example/
-├── model/        # Data classes (Product, CartItem) e Sealed Classes (Result)
-├── pages/        # Telas completas (LoginPage, HomePage, ProductDetailsPage)
-├── ui/           # Temas e componentes reutilizáveis (ProductCard)
-├── viewmodel/    # Lógica de negócio e persistência de estado de UI
-├── routes/       # Configuração do NavHost (AppNavigation)
-└── validators/   # Lógica pura de validação de dados
+├── domain/           # Camada de Negócio (Independente)
+│   ├── model/        # Modelos de dados (Product, Result)
+│   ├── repository/   # Interfaces de repositório
+│   └── usecase/      # Casos de uso (LoginUseCase, GetProductsUseCase)
+├── data/             # Camada de Implementação
+│   └── repository/   # Implementação real dos repositórios
+├── presentation/     # Camada de Interface (Compose)
+│   ├── login/        # Feature de Login (Page + ViewModel)
+│   ├── home/         # Feature de Catálogo (Page + ViewModel)
+│   └── details/      # Feature de Detalhes
+├── ui/               # Temas e componentes comuns (ProductCard)
+└── routes/           # Navegação Centralizada (AppNavigation)
 ```
 
 ## ⚙️ Como executar o projeto
 
-1. Certifique-se de ter o **Android Studio (Ladybug ou superior)** instalado.
-2. Clone este repositório:
-   
-```sh
-git clone https://github.com/seu-usuario/compose-example.git
-```
-
-3. Abra o projeto no Android Studio.
-4. Aguarde a sincronização do Gradle (necessário conexão com a internet para baixar as bibliotecas como Coil e Navigation).
-5. Execute o app em um emulador ou dispositivo físico com **API 24+**.
+1. Android Studio **Ladybug** ou superior.
+2. Clone o repositório.
+3. Sync Gradle e execute em um dispositivo **API 24+**.
 
 ---
 
 ## ✍️ Autor
 
-Desenvolvido por **Murilo Furlaneto** como parte de uma jornada de especialização em desenvolvimento Android Moderno.
+Desenvolvido por **Murilo Furlaneto** - Jornada de especialização em Android Moderno.

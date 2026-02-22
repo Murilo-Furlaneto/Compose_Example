@@ -1,11 +1,9 @@
 package br.com.furlaneto.murilo.compose_example.mock
 
-import androidx.compose.animation.core.copy
-import androidx.compose.runtime.mutableStateListOf // Importação necessária para o Compose
-import br.com.furlaneto.murilo.compose_example.model.CartItem
-import br.com.furlaneto.murilo.compose_example.model.Product
+import androidx.compose.runtime.mutableStateListOf
+import br.com.furlaneto.murilo.compose_example.domain.model.CartItem
+import br.com.furlaneto.murilo.compose_example.domain.model.Product
 
-// Usando mutableStateListOf para que o Compose observe mudanças na lista
 var productItems = mutableStateListOf<Product>(
     Product(
         id = 1,
@@ -65,39 +63,7 @@ var productItems = mutableStateListOf<Product>(
     )
 )
 
-// Usando mutableStateListOf para o carrinho
-var cartItems = mutableStateListOf<CartItem>(
-    CartItem(
-        product = Product(
-            id = 1,
-            name = "Hambúrguer Gourmet",
-            description = "Pão brioche, carne 180g, queijo cheddar e bacon crocante.",
-            price = 35.90,
-            imageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500"
-        ),
-        quantity = 2
-    ),
-    CartItem(
-        product = Product(
-            id = 2,
-            name = "Batata Frita Rústica",
-            description = "Batatas cortadas à mão com alecrim e páprica defumada.",
-            price = 18.00,
-            imageUrl = "https://images.unsplash.com/photo-1573015084184-213011612984?w=500"
-        ),
-        quantity = 1
-    ),
-    CartItem(
-        product = Product(
-            id = 5,
-            name = "Refrigerante Lata",
-            description = "Coca-cola ou Guaraná Antártica 350ml gelado.",
-            price = 6.50,
-            imageUrl = "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500"
-        ),
-        quantity = 3
-    )
-)
+var cartItems = mutableStateListOf<CartItem>()
 
 fun getProducts(): List<Product> = productItems
 
