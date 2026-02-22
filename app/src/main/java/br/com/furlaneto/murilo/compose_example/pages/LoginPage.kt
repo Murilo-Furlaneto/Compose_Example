@@ -33,18 +33,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.furlaneto.murilo.compose_example.model.Result
-import br.com.furlaneto.murilo.compose_example.validators.Validator
+import br.com.furlaneto.murilo.compose_example.viewmodel.LoginViewModel
 
 @Composable
 fun LoginPage(
     onLoginSucess: () -> Unit
 ) {
     val context = LocalContext.current
-    var nameController by remember { mutableStateOf("") }
-    var emailController by remember { mutableStateOf("") }
-    var passwordController by remember { mutableStateOf("") }
-    val validator = Validator()
+    val loginViewModel: LoginViewModel = viewModel()
 
     Column(
         modifier = Modifier
@@ -64,8 +62,8 @@ fun LoginPage(
 
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = nameController,
-            onValueChange = { nameController = it },
+            value = loginViewModel.name,
+            onValueChange = { loginViewModel.name = it },
             label = { Text("Nome") },
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
             shape = RoundedCornerShape(12.dp)
@@ -75,8 +73,8 @@ fun LoginPage(
 
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = emailController,
-            onValueChange = { emailController = it },
+            value = loginViewModel.email,
+            onValueChange = { loginViewModel.email = it },
             label = { Text("Email") },
             leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -87,8 +85,8 @@ fun LoginPage(
 
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = passwordController,
-            onValueChange = { passwordController = it },
+            value = loginViewModel.password,
+            onValueChange = { loginViewModel.password = it },
             label = { Text("Senha") },
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
             visualTransformation = PasswordVisualTransformation(),
@@ -102,13 +100,12 @@ fun LoginPage(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
-            enabled = nameController.isNotBlank() && emailController.isNotBlank() && passwordController.isNotBlank(),
+            enabled = loginViewModel.name.isNotBlank() && loginViewModel.email.isNotBlank() && loginViewModel.password.isNotBlank(),
             onClick = {
-                val validation = validator.loginValidator(nameController.trim(), emailController.trim(), passwordController)
-                
-                when (validation) {
+                when (val validation = loginViewModel.login()) {
                     is Result.Success -> {
                         Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                        onLoginSucess()
                     }
                     is Result.Error -> {
                         Toast.makeText(context, validation.message, Toast.LENGTH_SHORT).show()

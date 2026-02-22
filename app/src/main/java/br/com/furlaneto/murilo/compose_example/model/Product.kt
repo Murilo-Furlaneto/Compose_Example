@@ -1,6 +1,6 @@
 package br.com.furlaneto.murilo.compose_example.model
 
-class Product(
+data class Product(
     val id: Int,
     val name: String,
     val description: String,
@@ -8,8 +8,7 @@ class Product(
     val imageUrl: String
 )
 
-class CartItem(
+data class CartItem(
     val product: Product,
     val quantity: Int
-) {
-}
+)

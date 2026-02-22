@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "br.com.furlaneto.murilo.compose_example"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "br.com.furlaneto.murilo.compose_example"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3)
     testImplementation(libs.junit)
