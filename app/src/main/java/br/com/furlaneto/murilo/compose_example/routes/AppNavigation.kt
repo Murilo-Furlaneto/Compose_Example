@@ -15,7 +15,7 @@ import br.com.furlaneto.murilo.compose_example.presentation.login.LoginPage
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "home") {
         composable("login") {
             LoginPage(onLoginSucess = {
                 navController.navigate("home") {
@@ -33,12 +33,9 @@ fun AppNavigation() {
             arguments = listOf(navArgument("productId") { type = NavType.IntType })
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getInt("productId")
-            // Aqui estamos buscando o produto para passar para a tela de detalhes.
-            // Em uma arquitetura mais avançada, o ViewModel da Details buscaria pelo ID.
             val product = productId?.let { getProductById(it) }
             
             if (product != null) {
-                // Convertendo para o modelo de domínio para compatibilidade com a nova tela
                 val domainProduct = br.com.furlaneto.murilo.compose_example.domain.model.Product(
                     id = product.id,
                     name = product.name,
