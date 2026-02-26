@@ -1,5 +1,6 @@
-package br.com.furlaneto.murilo.compose_example.presentation.login
+package br.com.furlaneto.murilo.compose_example.presentation.signup
 
+import br.com.furlaneto.murilo.compose_example.domain.model.Result
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -29,12 +31,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import br.com.furlaneto.murilo.compose_example.domain.model.Result
 
 @Composable
-fun LoginPage(
+fun SignUpPage(
     onLoginSucess: () -> Unit,
-    viewModel: LoginViewModel = viewModel()
+    viewModel: SignUpViewModel = viewModel()
 ) {
     val context = LocalContext.current
 
@@ -46,13 +47,24 @@ fun LoginPage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Login",
+            text = "Bem-vindo",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(32.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = viewModel.name,
+            onValueChange = { viewModel.name = it },
+            label = { Text("Nome") },
+            leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -83,9 +95,9 @@ fun LoginPage(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
-            enabled =  viewModel.email.isNotBlank() && viewModel.password.isNotBlank(),
+            enabled = viewModel.name.isNotBlank() && viewModel.email.isNotBlank() && viewModel.password.isNotBlank(),
             onClick = {
-                when (val validation = viewModel.login()) {
+                when (val validation = viewModel.signUp()) {
                     is Result.Success -> {
                         Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
                         onLoginSucess()

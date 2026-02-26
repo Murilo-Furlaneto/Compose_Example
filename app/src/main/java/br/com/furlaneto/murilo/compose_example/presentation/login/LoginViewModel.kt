@@ -10,13 +10,12 @@ import br.com.furlaneto.murilo.compose_example.domain.usecase.LoginUseCase
 
 class LoginViewModel : ViewModel() {
 
-    var name by mutableStateOf("")
     var email by mutableStateOf("")
     var password by mutableStateOf("")
     
     private val loginUseCase = LoginUseCase()
 
     fun login(): ValidationResult {
-        return loginUseCase.execute(name, email, password)
+        return loginUseCase.execute(email, password)
     }
 }

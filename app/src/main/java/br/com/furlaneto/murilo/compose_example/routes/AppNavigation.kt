@@ -10,18 +10,29 @@ import br.com.furlaneto.murilo.compose_example.mock.getProductById
 import br.com.furlaneto.murilo.compose_example.presentation.details.ProductDetailsPage
 import br.com.furlaneto.murilo.compose_example.presentation.home.HomePage
 import br.com.furlaneto.murilo.compose_example.presentation.login.LoginPage
+import br.com.furlaneto.murilo.compose_example.presentation.signup.SignUpPage
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = "login") {
         composable("login") {
             LoginPage(onLoginSucess = {
                 navController.navigate("home") {
                     popUpTo("login") { inclusive = true }
                 }
             })
+        }
+
+        composable("signUp") {
+            SignUpPage(
+                onLoginSucess = {
+                    navController.navigate("home") {
+                        popUpTo("signUp") { inclusive = true }
+                    }
+                }
+            )
         }
         
         composable("home") {
