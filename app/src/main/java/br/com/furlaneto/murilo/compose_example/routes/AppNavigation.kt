@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import br.com.furlaneto.murilo.compose_example.mock.getProductById
+import br.com.furlaneto.murilo.compose_example.presentation.cart.CartPage
 import br.com.furlaneto.murilo.compose_example.presentation.details.ProductDetailsPage
 import br.com.furlaneto.murilo.compose_example.presentation.home.HomePage
 import br.com.furlaneto.murilo.compose_example.presentation.login.LoginPage
@@ -16,7 +17,7 @@ import br.com.furlaneto.murilo.compose_example.presentation.signup.SignUpPage
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "home") {
         composable("login") {
             LoginPage(onLoginSucess = {
                 navController.navigate("home") {
@@ -60,6 +61,10 @@ fun AppNavigation() {
                     onBackClick = { navController.popBackStack() }
                 )
             }
+        }
+
+        composable("cart"){
+            CartPage(navController = navController)
         }
     }
 }

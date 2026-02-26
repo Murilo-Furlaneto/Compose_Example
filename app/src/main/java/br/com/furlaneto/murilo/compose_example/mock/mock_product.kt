@@ -63,7 +63,25 @@ var productItems = mutableStateListOf<Product>(
     )
 )
 
-var cartItems = mutableStateListOf<CartItem>()
+var cartItems = mutableStateListOf<CartItem>(
+    CartItem(
+        product = productItems[0],
+        quantity = 2
+    ),
+    CartItem(
+        product = productItems[1],
+        quantity = 1
+    ),
+    CartItem(
+        product = productItems[4],
+        quantity = 3
+    ),
+    CartItem(
+        product = productItems[7],
+        quantity = 1
+    )
+)
+
 
 fun getProducts(): List<Product> = productItems
 
